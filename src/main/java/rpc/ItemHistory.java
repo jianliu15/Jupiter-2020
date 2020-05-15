@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,8 +35,13 @@ public class ItemHistory extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String userId = request.getParameter("user_id");
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			response.setStatus(403);
+			return;
+		}
 
+		String userId = request.getParameter("user_id");
 		MySQLConnection connection = new MySQLConnection();
 		Set<Item> items = connection.getFavoriteItems(userId);
 		connection.close();
@@ -55,6 +61,12 @@ public class ItemHistory extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			response.setStatus(403);
+			return;
+		}
+
 		MySQLConnection connection = new MySQLConnection();
 		JSONObject input = RpcHelper.readJSONObject(request);
 		String userId = input.getString("user_id");
@@ -70,6 +82,12 @@ public class ItemHistory extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			response.setStatus(403);
+			return;
+		}
+
 		MySQLConnection connection = new MySQLConnection();
 		JSONObject input = RpcHelper.readJSONObject(request);
 		String userId = input.getString("user_id");
