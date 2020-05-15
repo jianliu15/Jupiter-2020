@@ -47,6 +47,10 @@ public class Item {
 		return url;
 	}
 
+	public void setKeywords(Set<String> keywords) {// why set?
+		this.keywords = keywords;
+	}
+
 	public JSONObject toJSONObject() {
 		JSONObject obj = new JSONObject();
 		try {
