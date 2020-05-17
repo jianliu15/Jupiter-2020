@@ -13,7 +13,7 @@ import com.monkeylearn.MonkeyLearnResponse;
 
 public class MonkeyLearnClient {
 	// make sure change it to your api key and the latest model id
-	private static final String API_KEY = "bf8f9e1dac292d17031132d76db191a41d3cc171";
+	private static final String API_KEY = "593000f66e163afa1f31ede245743762c5a13859";
 	private static final String MODEL_ID = "ex_YCya9nrn";
 
 	public static void main(String[] args) {
